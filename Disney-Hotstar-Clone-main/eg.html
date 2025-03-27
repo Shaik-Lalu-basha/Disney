@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TV Channels</title>
+  <link rel="stylesheet" href="style.css">
+  <style>/* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f0f0f;
+      color: #fff;
+    }
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      padding: 1em 2em;
+      background: rgba(0, 0, 0, 0.7);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+    
+    .navbar .logo {
+      font-size: 1.5em;
+    }
+    
+    .navbar .nav-links a {
+      margin: 0 1em;
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .hero {
+      position: relative;
+      height: 60vh;
+      overflow: hidden;
+    }
+    
+    .carousel {
+      display: flex;
+      transition: transform 0.5s ease;
+    }
+    
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+    
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .overlay {
+      position: absolute;
+      bottom: 20%;
+      left: 10%;
+      color: #fff;
+    }
+    
+    button {
+      padding: 10px 20px;
+      background-color: #0077ff;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    
+    .content-section {
+      padding: 2em;
+    }
+    
+    .content-section h2 {
+      margin-bottom: 1em;
+    }
+    
+    .row {
+      display: flex;
+      overflow-x: auto;
+      gap: 1em;
+    }
+    
+    .thumbnail img {
+      width: 200px;
+      border-radius: 8px;
+      transition: transform 0.3s;
+    }
+    
+    .thumbnail:hover img {
+      transform: scale(1.05);
+    }
+    </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="logo">TV Channels</div>
+    <div class="nav-links">
+      <a href="#home">Home</a>
+      <a href="#trending">Trending</a>
+      <a href="#movies">Movies</a>
+      <a href="#series">Series</a>
+    </div>
+  </nav>
+
+  <!-- Hero Carousel -->
+  <section class="hero">
+    <div class="carousel">
+      <div class="slide active">
+        <img src="images/slider 2.PNG" alt="Hero 1">
+        <div class="overlay">
+          <h1>Featured Show</h1>
+          <p>Catch the latest episodes of our top show!</p>
+          <button>Watch Now</button>
+        </div>
+      </div>
+      <div class="slide">
+        <img src="images/slider 1.PNG" alt="Hero 2">
+        <div class="overlay">
+          <h1>New Release</h1>
+          <p>Don't miss out on this new release!</p>
+          <button>Watch Now</button>
+        </div>
+      </div>
+      <!-- Add more slides as needed -->
+    </div>
+  </section>
+
+  <!-- Category Rows -->
+  <section class="content-section" id="trending">
+    <h2>Trending</h2>
+    <div class="row">
+      <div class="thumbnail"><img src="thumbnail1.jpg" alt="Show 1"></div>
+      <div class="thumbnail"><img src="thumbnail2.jpg" alt="Show 2"></div>
+      <div class="thumbnail"><img src="thumbnail3.jpg" alt="Show 3"></div>
+      <!-- Add more thumbnails as needed -->
+    </div>
+  </section>
+
+  <section class="content-section" id="movies">
+    <h2>Movies</h2>
+    <div class="row">
+      <div class="thumbnail"><img src="movie1.jpg" alt="Movie 1"></div>
+      <div class="thumbnail"><img src="movie2.jpg" alt="Movie 2"></div>
+      <div class="thumbnail"><img src="movie3.jpg" alt="Movie 3"></div>
+      <!-- Add more thumbnails as needed -->
+    </div>
+  </section>
+  <script>const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+    }
+    
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex);
+    }
+    
+    setInterval(nextSlide, 5000); // Change slide every 5 seconds
+    </script>
+
+  <script src="script.js"></script>
+</body>
+</html>

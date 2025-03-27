@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+<style>/* Subscribe Button */
+    .subscribe-btn {
+        background-color: #1f80e0;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    
+    .subscribe-btn:hover {
+        background-color: #006bb3;
+        transform: scale(1.05);
+    }
+    
+    /* Modal Styling */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8); /* Black background with opacity */
+    }
+    
+    .modal-content {
+        background-color: #fff;
+        margin: 10% auto;
+        padding: 20px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+    
+    .close-btn {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+    
+    .close-btn:hover {
+        color: #000;
+    }
+    
+    .plan {
+        margin: 20px 0;
+    }
+    
+    .plan button {
+        background-color: #1f80e0;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .plan button:hover {
+        background-color: #006bb3;
+    }
+    
+</style>
+    <title>Disney+ Clone</title>
+</head>
+<body>
+    <nav class="navbar">
+        <img src="images/logo.png" class="brand-logo" alt="">
+        <ul class="nav-links">
+            <li class="nav-items"><a href="index.html">Home</a></li>
+            <li class="nav-items"><a href="about.html">about</a></li>
+            <li class="nav-items"><a href="tv.html">TV</a></li>
+            <li class="nav-items"><a href="movies.html">movies</a></li>
+            <li class="nav-items"><a href="sports.html">sports</a></li>
+            <li class="nav-items"><a href="home.html">Premium</a></li>
+        </ul>
+
+        <div class="right-container">
+            <input type="text" class="search-box" placeholder="search">
+            <button class="subscribe-btn" onclick="openSubscriptionModal()">Subscribe</button>
+
+            <a href="login.html" class="login-link">Login</a>
+        </div>
+    </nav>
+    
+
+<!-- Subscription Modal -->
+<div id="subscriptionModal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeSubscriptionModal()">&times;</span>
+        <h2>Choose Your Subscription</h2>
+        <p>Select a plan that works for you:</p>
+        <div class="plan">
+            <h3>Basic Plan</h3>
+            <p>$5.99/month</p>
+            <button onclick="subscribe('Basic')">Subscribe</button>
+        </div>
+        <div class="plan">
+            <h3>Premium Plan</h3>
+            <p>$9.99/month</p>
+            <button onclick="subscribe('Premium')">Subscribe</button>
+        </div>
+    </div>
+</div>
+
+    
+    <script>
+    
+    
+    function openSubscriptionModal() {
+        document.getElementById("subscriptionModal").style.display = "block";
+    }
+    
+    function closeSubscriptionModal() {
+        document.getElementById("subscriptionModal").style.display = "none";
+    }
+    
+    function subscribe(plan) {
+        alert("You have selected the " + plan + " plan!");
+        // Add your subscription logic here, like redirecting to a checkout page or API call.
+        closeSubscriptionModal(); // Close the modal after selection
+    }
+    
+    // Close modal if the user clicks outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById("subscriptionModal");
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
+    
+    </script>
+<style>
+    /* Shared Styles */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        height: 80vh; /* Adjust height as needed */
+        overflow: hidden;
+        margin-bottom: 20px; /* Space between carousels */
+    }
+    
+    .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 200%; /* Adjust for number of slides */
+    }
+    
+    .slider {
+        position: relative;
+        width: 50%; /* Adjust width based on the number of slides */
+        height: 100%;
+        flex-shrink: 0;
+    }
+    
+    .slide-image,
+    .slide-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        z-index: 1;
+    }
+    
+    .slide-content {
+        position: relative;
+        z-index: 2;
+        color: white;
+        padding: 20px;
+        background: transparent;
+        max-width: 600px;
+        margin: 0 auto;
+        text-align: center;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .movie-title {
+        font-size: 2rem;
+        margin: 0;
+    }
+    
+    .movie-des {
+        font-size: 1rem;
+    }
+    
+    /* Carousel Controls */
+    .carousel-controls {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        z-index: 3;
+    }
+    
+    .carousel-controls button {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+    }
+    
+    .carousel-controls button:hover {
+        background-color: rgba(0, 0, 0, 0.7);
+    }
+    
+    /* Audio Toggle Button */
+    .audio-toggle {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: #ffffff;
+        border: none;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 5;
+        transition: background-color 0.3s;
+    }
+
+    .audio-toggle:hover {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+</style>
+
+<!-- Video Carousel -->
+<div class="carousel-container">
+    <div class="carousel" id="video-carousel">
+        <div class="slider">
+            <video class="slide-video" autoplay muted loop id="carousel-video">
+                <source src="videos/movie.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="slide-content">
+                <h1 class="movie-title"></h1>
+                <p class="movie-des"></p>
+            </div>
+        </div>
+        <div class="slider">
+            <video class="slide-video" autoplay muted loop>
+                <source src="videos/ntr.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="slide-content">
+                <h1 class="movie-title"></h1>
+                <p class="movie-des"></p>
+            </div>
+        </div>
+    </div>
+    <div class="carousel-controls">
+        <button onclick="prevVideoSlide()">Prev</button>
+        <button onclick="nextVideoSlide()">Next</button>
+    </div>
+    <button class="audio-toggle" onclick="toggleAudio()">Audio: Off</button>
+</div>
+
+<script>
+    // Image Carousel
+    let currentImageSlide = 0;
+    
+    function updateImageCarousel() {
+        const imageCarousel = document.getElementById('image-carousel');
+        imageCarousel.style.transform = `translateX(-${currentImageSlide * 50}%)`;
+    }
+    
+    function nextImageSlide() {
+        currentImageSlide = (currentImageSlide + 1) % 2; // Adjust for number of image slides
+        updateImageCarousel();
+    }
+    
+    function prevImageSlide() {
+        currentImageSlide = (currentImageSlide - 1 + 2) % 2; // Adjust for number of image slides
+        updateImageCarousel();
+    }
+    
+    // Video Carousel
+    let currentVideoSlide = 0;
+    
+    function updateVideoCarousel() {
+        const videoCarousel = document.getElementById('video-carousel');
+        videoCarousel.style.transform = `translateX(-${currentVideoSlide * 50}%)`;
+    }
+    
+    function nextVideoSlide() {
+        currentVideoSlide = (currentVideoSlide + 1) % 2; // Adjust for number of video slides
+        updateVideoCarousel();
+    }
+    
+    function prevVideoSlide() {
+        currentVideoSlide = (currentVideoSlide - 1 + 2) % 2; // Adjust for number of video slides
+        updateVideoCarousel();
+    }
+    
+    // Audio Toggle
+    let isAudioOn = false;
+    const audioToggleBtn = document.querySelector('.audio-toggle');
+    const carouselVideo = document.getElementById('carousel-video');
+
+    function toggleAudio() {
+        isAudioOn = !isAudioOn;
+        carouselVideo.muted = !isAudioOn;
+        audioToggleBtn.textContent = `Audio: ${isAudioOn ? 'On' : 'Off'}`;
+    }
+</script>
+
+
+
+
+<style>
+    /* Global Reset */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    /* Footer */
+    .footer {
+        text-align: center;
+        padding: 1em;
+        background: rgba(0, 0, 0, 0.8);
+        font-size: 0.9em;
+        color: #bbb;
+        z-index: 2;
+        position: relative;
+        animation: fadeInUp 1s ease;
+    }
+
+    .footer a {
+        color: #ffdc5e;
+        margin: 0 10px;
+        text-decoration: none;
+    }
+
+    .footer a:hover {
+        text-decoration: underline;
+    }
+
+    .newsletter-input {
+        position: relative;
+        max-width: 400px;
+        margin-top: 10px;
+    }
+
+    .newsletter-input input {
+        padding: 10px;
+        border: 2px solid #ff4757;
+        transition: border-color 0.3s ease;
+    }
+
+    .newsletter-input input:focus {
+        border-color: #ffffff;
+    }
+
+    .newsletter-input button {
+        background-color: #ff4757;
+        color: #ffffff;
+        transition: background-color 0.3s ease;
+    }
+
+    .newsletter-input button:hover {
+        background-color: #e84118;
+    }
+
+    /* Background Gradient and Animation */
+    .background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #100951, #050741);
+        animation: backgroundAnimation 20s infinite linear;
+    }
+
+    @keyframes backgroundAnimation {
+        0% { background: linear-gradient(135deg, #090b47, #0d0b4d); }
+        50% { background: linear-gradient(135deg, #0c0942, #0d0f5e); }
+        100% { background: linear-gradient(135deg, #1b0f53, #0f0c4f); }
+    }
+
+    
+
+    /* Video Card Styling */
+    .video-card-container {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-top: 50px;
+    }
+
+    .video-card {
+        position: relative;
+        width: 320px;
+        height: 180px;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+        transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+        transform: scale(1.05);
+    }
+
+    .video-card-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s ease;
+    }
+
+    .card-video {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .video-card:hover .card-video {
+        opacity: 1;
+    }
+
+    .video-card:hover .video-card-image {
+        opacity: 0;
+    }
+</style>
+
+<h1 class="title">TV Channels</h1>
+    <div class="movies-list">
+        <button class="pre-btn"><img src="images/pre.png" alt=""></button>
+        <button class="nxt-btn"><img src="images/nxt.png" alt=""></button>
+        <div class="card-container">
+
+            <div class="card">
+                <img src="img/bollywood.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/breaking.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/etv.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/footballheigh.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/livecricket.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/nbalive.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="img/THE.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+            <div class="card">
+                <img src="img/www.jpg" alt="" class="card-img">
+                <div class="card-body">
+                    <h2 class="name">movie name</h2>
+                    <h6 class="des">Lorem ipsum dolor sit amet consectetur.</h6>
+                    <button class="watchlist-btn">add to watchlist</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+  <!-- Footer Start -->
+    <div class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Company</h4>
+                    <a class="btn btn-link text-light" href="about.html">About Us</a>
+                    <a class="btn btn-link text-light" href="contact.html">Contact Us</a>
+                    <a class="btn btn-link text-light" href="#">Privacy Policy</a>
+                    <a class="btn btn-link text-light" href="#">Terms of Service</a>
+                    <a class="btn btn-link text-light" href="#">FAQs & Help</a>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Contact</h4>
+                    <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>Sirivella, Nandyal, India</p>
+                    <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+91 7396818932</p>
+                    <p class="mb-2"><i class="fa fa-envelope me-3"></i>support@telelivetv.com</p>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-outline-light btn-social" href="#"><i class="fab fa-whatsapp fw-normal"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="text-white mb-3">Newsletter</h4>
+                    <p style="color: #f5f7fa;">Stay updated with our latest services and exclusive content!</p>
+                    <div class="newsletter-input position-relative mx-auto" style="max-width: 400px;">
+                        <input class="form-control border-primary w-100 py-3 ps-4 pe-5" type="email" id="newsletter-email" placeholder="Your email" required>
+                        <button type="button" class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2" onclick="subscribe()">Sign Up</button>
+                    </div>
+                    <div id="subscription-message" class="text-light mt-2" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; <a class="border-bottom text-light" href="#">Tele Live TV</a>, All Rights Reserved.
+            | <a href="#">Help</a>
+        </div>
+    </div>
+    <!-- Footer End -->
+    
+    <!-- Optional JavaScript for Subscription -->
+    <script>
+    function subscribe() {
+        const emailInput = document.getElementById('newsletter-email');
+        const email = emailInput.value;
+    
+        if (email) {
+            // Simulate an API call or form submission
+            // Here you can add your logic to handle the email subscription
+            document.getElementById('subscription-message').innerText = 'Thank you for subscribing with ' + email + '!';
+            document.getElementById('subscription-message').style.display = 'block';
+            emailInput.value = ''; // Clear the input field
+        } else {
+            document.getElementById('subscription-message').innerText = 'Please enter a valid email address.';
+            document.getElementById('subscription-message').style.display = 'block';
+        }
+    }
+    </script>
+    
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Login Screen</title>
+<link rel="stylesheet" href="style.css">
+<style>/* style.css */
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        background-color: #1A1A1A;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #A0A0A0;
+    }
+    
+    .login-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(20, 20, 20, 0.95);
+        padding: 20px;
+        border-radius: 8px;
+        width: 500px;
+        max-width: 90%;
+    }
+    
+    .login-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .qr-section, .phone-section {
+        text-align: center;
+        color: #ffffff;
+        max-width: 45%;
+    }
+    
+    .qr-code {
+        width: 100px;
+        margin-bottom: 10px;
+    }
+    
+    .phone-input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        margin-top: 10px;
+    }
+    
+    .divider {
+        color: #A0A0A0;
+        font-weight: bold;
+    }
+    
+    .terms {
+        font-size: 12px;
+        color: #A0A0A0;
+        margin-top: 10px;
+    }
+    
+    .terms a, .help-link {
+        color: #0080FF;
+        text-decoration: none;
+    }
+    .help-link {
+        display: block;
+        margin-top: 5px;
+    }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-box">
+        <div class="qr-section">
+            <img src="qr-code.png" alt="QR Code" class="qr-code">
+            <p>Use Camera App to Scan QR</p>
+            <p>Click on the link generated to redirect to Disney+ Hotstar mobile app</p>
+        </div>
+        <div class="divider">OR</div>
+        <div class="phone-section">
+            <input type="text" placeholder="+91 Enter mobile number" class="phone-input">
+            <p class="terms">By proceeding you confirm that you are above 18 years of age and agree to the <a href="#">Privacy Policy</a> & <a href="#">Terms of Use</a>.</p>
+            <a href="#" class="help-link">Having trouble logging in? Get Help</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
